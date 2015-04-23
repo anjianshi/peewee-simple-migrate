@@ -18,7 +18,7 @@ class MigrationError(Exception):
 
 def generate_model(db):
     class Migration(Model):
-        """This model it self can't be migrated，so don't change it's structure unless necessary."""
+        """This model it self can't be migrated, so don't change it's structure unless necessary."""
         version = IntegerField(primary_key=True)
         latest_migrate = DateTimeField(null=False)
 
