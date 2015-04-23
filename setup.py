@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='peewee-simple-migrate',
-    version='0.0.1',
+    version='0.0.2',
     url='https://github.com/anjianshi/peewee-simple-migrate',
     license='MIT',
     author='anjianshi',
