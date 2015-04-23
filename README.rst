@@ -11,18 +11,19 @@ peewee-simple-migrate
 
 ver_xxx.py 和 initialize.py 中的代码应包裹在一个名为 `run()` 的函数中，并接收一个参数 `db`。
 下面是一个例子：
+
 .. code-block:: python
 
-# ver_123.py
-from playhouse.migrate import *
+    # ver_123.py
+    from playhouse.migrate import *
 
 
-def run(db):
-    migrator = PostgresqlMigrator(db)
-    migrate(
-        migrator.rename_column("my_table", "col", "new_name")
-    )
-```
+    def run(db):
+        migrator = PostgresqlMigrator(db)
+        migrate(
+            migrator.rename_column("my_table", "col", "new_name")
+        )
+
 
 
 其二
