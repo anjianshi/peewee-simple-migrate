@@ -61,7 +61,7 @@ def run(db, migration_dir):
         if current_version not in versions:
             raise MigrationError("version '{}' not found in local".format(current_version))
         elif current_version == versions[-1]:
-            logger.info("Already latest version {}, doesn't need migrate.".format(current_version))
+            logger.debug("Already latest version {}, doesn't need migrate.".format(current_version))
         else:
             with db.transaction():
                 for version in versions:
