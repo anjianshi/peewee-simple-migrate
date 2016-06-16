@@ -50,7 +50,9 @@ peewee-simple-migrate 会在数据库中创建一个名为 `migration` 的表，
 All you need is:
 
 1. Define your models, initialize file, and migrate files properly.
-2. Call the `run()` function whenever your app start.
+2. Call the `run()` function everytimes your app start.
+
+If sometimes you only want to check if your app need migrate, but don't execute migrate, call the `need_migrate()` function.
 
 
 支持 Python 2.7+, 3.2+
