@@ -16,7 +16,7 @@ class MigrationError(Exception):
     pass
 
 
-def generate_model(db):
+def generate_model(db, table_name=None):
     class Migration(Model):
         """This model it self can't be migrated, so don't change it's structure unless necessary."""
         version = IntegerField(primary_key=True)
@@ -24,6 +24,7 @@ def generate_model(db):
 
         class Meta:
             database = db
+            db_table = table_name or "migration"
 
     return Migration
 
@@ -51,8 +52,8 @@ def execute_migrate_code(migration_dir, module_name, db):
     sys.path = sys.path[1:]
 
 
-def prepare(db, migration_dir):
-    Migration = generate_model(db)
+def prepare(db, migration_dir, table_name=None):
+    Migration = generate_model(db, table_name)
     versions = get_versions(migration_dir)
 
     need_migration = False
@@ -70,13 +71,13 @@ def prepare(db, migration_dir):
     return [need_migration, current_version, Migration, versions]
 
 
-def need_migrate(db, migration_dir):
+def need_migrate(db, migration_dir, table_name=None):
     """return: bool"""
-    return prepare(db, migration_dir)[0]
+    return prepare(db, migration_dir, table_name)[0]
 
 
-def run(db, migration_dir, check_only=False):
-    [need_migration, current_version, Migration, versions] = prepare(db, migration_dir)
+def run(db, migration_dir, check_only=False, table_name=None):
+    [need_migration, current_version, Migration, versions] = prepare(db, migration_dir, table_name)
 
     if not need_migration:
         logger.debug("Already latest version {}, doesn't need migrate.".format(current_version))
